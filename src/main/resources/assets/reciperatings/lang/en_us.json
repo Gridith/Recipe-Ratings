@@ -1,14 +1,14 @@
 {
   "reciperatings.icons.0.title": "Sequence Break",
-  "reciperatings.icons.0.description": "§7§r",
+  "reciperatings.icons.0.description": "   §7This recipe circumvents normal progression!\n   For if you don’t mind skipping content§r",
   "reciperatings.icons.1.title": "Builders Shortcut",
-  "reciperatings.icons.1.description": "§7§r",
+  "reciperatings.icons.1.description": "   §7Alternative, often cheaper, recipes.\n   For when you want to put your time into things other than grinding§r",
   "reciperatings.icons.4.title": "Vanilla Default",
-  "reciperatings.icons.4.description": "§7§r",
+  "reciperatings.icons.4.description": "   §7Recipes with this rating are unchanged!§r",
   "reciperatings.icons.5.title": "Rat's Default",
-  "reciperatings.icons.5.description": "§7§r",
+  "reciperatings.icons.5.description": "   §7This recipes default has been changed.\n   Mostly for better integration between mods§r",
   "reciperatings.icons.7.title": "Artisans Process",
-  "reciperatings.icons.7.description": "§7§r",
+  "reciperatings.icons.7.description": "   §7Alternative, often costlier, recipes.\n   For if you want an additional challenge§r",
   "reciperatings.icons.8.title": "Glorp Quest",
-  "reciperatings.icons.8.description": "§7§r"
+  "reciperatings.icons.8.description": "   §7The most, often pointlessly, convoluted recipes in the pack.\n   For automation minded players to sink their teeth into§r"
 }
