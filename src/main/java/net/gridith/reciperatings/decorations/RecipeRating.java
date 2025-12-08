@@ -18,7 +18,6 @@ public class RecipeRating implements EmiRecipeDecorator {
             if (!emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments")){
                 switch(emiRecipe.getCategory().getId().toString()){
                     default:
-                        System.out.println(emiRecipe.getCategory().getId().toString());
                         addRecipeRatingIcon(widgetHolder, emiRecipe,
                                 4,
                                 RecipeRatingTextureSize,
@@ -74,7 +73,7 @@ public class RecipeRating implements EmiRecipeDecorator {
                 else return -4;
             case "create:automatic_brewing", "farmersdelight:cooking":
                 if(axisChar=='x'){return widgetHolder.getWidth() + 5;}
-                else return widgetHolder.getHeight() + 16;
+                else return widgetHolder.getHeight() - 16;
 
             case "brewinandchewin:pouring": // Alight top left
                 return 0;
