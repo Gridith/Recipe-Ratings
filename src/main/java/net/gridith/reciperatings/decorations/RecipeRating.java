@@ -65,8 +65,10 @@ public class RecipeRating implements EmiRecipeDecorator {
      */
     public static void addRecipeRatingIcon(WidgetHolder widgetHolder, EmiRecipe emiRecipe, int iconID, int textureSize, int iconSize) {
         int iconsPerRow = textureSize/iconSize;
-        int u = iconID * iconSize;
-        int v = (iconID+iconsPerRow)%iconsPerRow * iconSize;
+        int u = (iconID+iconsPerRow)%iconsPerRow * iconSize;
+        int v = iconID / iconsPerRow * iconSize;
+        System.out.println(u);
+        System.out.println(v);
         widgetHolder.addTexture(ResourceLocation.fromNamespaceAndPath(
                 "reciperatings", "textures/gui/ratings.png"),
                 getPositionInCategory(widgetHolder, emiRecipe, iconSize, 'x'),
