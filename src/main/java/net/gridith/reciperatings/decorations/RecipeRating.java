@@ -13,17 +13,46 @@ public class RecipeRating implements EmiRecipeDecorator {
     public void decorateRecipe(EmiRecipe emiRecipe, WidgetHolder widgetHolder) {
         final int RecipeRatingIconSize = 12;
         final int RecipeRatingTextureSize = RecipeRatingIconSize*3;
-
         if (emiRecipe.getId() != null) {
-            if (!emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments")){
-                switch(emiRecipe.getCategory().getId().toString()){
-                    default:
+            if (emiRecipe.getId().getPath().contains("/") && !emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments")){
+                switch(emiRecipe.getId().getPath().split("/")[0]){
+                    case "sequencebreak":
                         addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                4,
+                                0,
+                                RecipeRatingTextureSize,
+                                RecipeRatingIconSize
+                        ); break;
+                    case "buildersshortcut":
+                        addRecipeRatingIcon(widgetHolder, emiRecipe,
+                                1,
+                                RecipeRatingTextureSize,
+                                RecipeRatingIconSize
+                        ); break;
+                    case "ratsdefault":
+                        addRecipeRatingIcon(widgetHolder, emiRecipe,
+                                5,
+                                RecipeRatingTextureSize,
+                                RecipeRatingIconSize
+                        ); break;
+                    case "artisansprocess":
+                        addRecipeRatingIcon(widgetHolder, emiRecipe,
+                                7,
+                                RecipeRatingTextureSize,
+                                RecipeRatingIconSize
+                        ); break;
+                    case "glorpquest":
+                        addRecipeRatingIcon(widgetHolder, emiRecipe,
+                                8,
                                 RecipeRatingTextureSize,
                                 RecipeRatingIconSize
                         ); break;
                 }
+            }else{ // Vanilla Default
+                addRecipeRatingIcon(widgetHolder, emiRecipe,
+                        4,
+                        RecipeRatingTextureSize,
+                        RecipeRatingIconSize
+                );
             }
         }
     }
