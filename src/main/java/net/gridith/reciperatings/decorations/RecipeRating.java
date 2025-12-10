@@ -14,7 +14,7 @@ public class RecipeRating implements EmiRecipeDecorator {
         final int RecipeRatingIconSize = 12;
         final int RecipeRatingTextureSize = RecipeRatingIconSize*3;
         if (emiRecipe.getId() != null) {
-            if (emiRecipe.getId().getPath().contains("/") && !emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments")){
+            if (!emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments")){
                 switch(emiRecipe.getId().getPath().split("/")[0]){
                     case "sequencebreak":
                         addRecipeRatingIcon(widgetHolder, emiRecipe,
@@ -46,13 +46,14 @@ public class RecipeRating implements EmiRecipeDecorator {
                                 RecipeRatingTextureSize,
                                 RecipeRatingIconSize
                         ); break;
+
+                    default:
+                        addRecipeRatingIcon(widgetHolder, emiRecipe,
+                                4,
+                                RecipeRatingTextureSize,
+                                RecipeRatingIconSize
+                        ); break;
                 }
-            }else{ // Vanilla Default
-                addRecipeRatingIcon(widgetHolder, emiRecipe,
-                        4,
-                        RecipeRatingTextureSize,
-                        RecipeRatingIconSize
-                );
             }
         }
     }
@@ -96,17 +97,17 @@ public class RecipeRating implements EmiRecipeDecorator {
         switch(emiRecipe.getCategory().getId().toString()){
             case "minecraft:smithing":
                 if(axisChar=='x'){return -17 ;}
-                return -4;
+                return widgetHolder.getHeight() - iconSize+4;
             case "minecraft:stonecutting": // Align with recipe buttons
-                if(axisChar=='x'){return widgetHolder.getWidth() +19 ;}
+                if(axisChar=='x'){return widgetHolder.getWidth() +18 ;}
                 else return -4;
-            case "create:automatic_brewing", "farmersdelight:cooking":
+            case "farmersdelight:cooking":
                 if(axisChar=='x'){return widgetHolder.getWidth() + 5;}
-                else return widgetHolder.getHeight() - 16;
+                else return widgetHolder.getHeight() - 48;
 
             case "brewinandchewin:pouring": // Alight top left
                 return 0;
-            case "brewinandchewin:aging", "create:milling", "create:mixing", "create:packing", "createaddition:liquid_burning": // Alight top right
+            case "brewinandchewin:aging", "create:milling", "create:mixing", "create:packing", "createaddition:liquid_burning", "create:automatic_brewing": // Alight top right
                 if(axisChar=='x'){return widgetHolder.getWidth() - iconSize;}
                 else return 0;
             case "": // Align bottom left
