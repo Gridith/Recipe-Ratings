@@ -7,55 +7,37 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
+import java.util.Map;
 
 public class RecipeRating implements EmiRecipeDecorator {
     @Override
     public void decorateRecipe(EmiRecipe emiRecipe, WidgetHolder widgetHolder) {
-        final int RecipeRatingIconSize = 12;
-        final int RecipeRatingTextureSize = RecipeRatingIconSize*3;
         if (emiRecipe.getId() != null) {
-            if (!emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments")){
-                switch(emiRecipe.getId().getPath().split("/")[0]){
-                    case "sequencebreak":
-                        addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                0,
-                                RecipeRatingTextureSize,
-                                RecipeRatingIconSize
-                        ); break;
-                    case "buildersshortcut":
-                        addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                1,
-                                RecipeRatingTextureSize,
-                                RecipeRatingIconSize
-                        ); break;
-                    case "ratsdefault":
-                        addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                5,
-                                RecipeRatingTextureSize,
-                                RecipeRatingIconSize
-                        ); break;
-                    case "artisansprocess":
-                        addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                7,
-                                RecipeRatingTextureSize,
-                                RecipeRatingIconSize
-                        ); break;
-                    case "glorpquest":
-                        addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                8,
-                                RecipeRatingTextureSize,
-                                RecipeRatingIconSize
-                        ); break;
-
-                    default:
-                        addRecipeRatingIcon(widgetHolder, emiRecipe,
-                                4,
-                                RecipeRatingTextureSize,
-                                RecipeRatingIconSize
-                        ); break;
-                }
-            }
+            // TODO figure out how configs can enable/disable these ratings
+            EnableRatsEnrichmentRecipeRatings(emiRecipe, widgetHolder);
         }
+    }
+
+    private static void EnableRatsEnrichmentRecipeRatings(EmiRecipe emiRecipe, WidgetHolder widgetHolder) {
+        if (!isValidCategoryCheck(emiRecipe)) return;
+
+        final int ICON_SIZE = 12;
+        final int TEXTURE_SIZE = ICON_SIZE*3;
+        int ratingId = 4;
+        final Map<String, Integer> RATING_IDS = Map.of(
+                "sequencebreak", 0,
+                "buildersshortcut", 1,
+                "ratsdefault", 5,
+                "artisansprocess", 7,
+                "glorpquest", 8
+        );
+
+        for (var entry : RATING_IDS.entrySet()) {if (emiRecipe.getId().getPath().contains(entry.getKey())) {ratingId = entry.getValue();}}
+        addRecipeRatingIcon(widgetHolder, emiRecipe, ratingId, TEXTURE_SIZE, ICON_SIZE );
+    }
+
+    public static boolean isValidCategoryCheck(EmiRecipe emiRecipe) {
+        return !emiRecipe.getCategory().getId().toString().matches("create:block_cutting|emi:fuel|emi:world_interaction|emi:composting|emi:tag|emi:anvil_repairing|emi_loot:chest_loot|emi_loot:mob_drops|emi_loot:archaeology_drops|emi:info|oritech:bio_generator|oritech:fuel_generator|oritech:lava_generator|oritech:steam_engine|oritech:reactor|emi_enchanting:enchantments");
     }
 
     /**
